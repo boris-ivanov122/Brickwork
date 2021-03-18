@@ -5,27 +5,27 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int m = scanner.nextInt();// This is the M input
-        int n = scanner.nextInt();//This is the N input
-        if (m > 100 || n > 100) { //Here we validate if they are under or equal to 100
+        int m = scanner.nextInt();// M input
+        int n = scanner.nextInt();//N input
+        if (m > 100 || n > 100) { //Validate if they are under or equal to 100
             System.out.println(-1);
             return;
         }
-        int numberOfBricks = m * n / 2; //This is the number of bricks that I will use in order to build the second layer
-        ArrayDeque<Integer> brickHolder = new ArrayDeque<>();//This is my brickHolder where I will keep all my bricks
-        for (int i = 1; i <= numberOfBricks; i++) {//Here I am putting my bricks in my brickHolder
+        int numberOfBricks = m * n / 2; //The number of bricks that I will use in order to build the second layer
+        ArrayDeque<Integer> brickHolder = new ArrayDeque<>();//brickHolder
+        for (int i = 1; i <= numberOfBricks; i++) {//Placing the bricks into the brickHolder
             brickHolder.offer(i);
             brickHolder.offer(i);
         }
 
-        int[][] Layer1 = new int[m][n]; //This is the first layer
-        int[][] Layer2 = new int[m][n]; // This is the second layer
-        for (int row = 0; row < m; row++) { //Here I am putting the bricks from the Console into the first layer
+        int[][] Layer1 = new int[m][n]; //First layer
+        int[][] Layer2 = new int[m][n]; // Second layer
+        for (int row = 0; row < m; row++) { //The Console's first layer
             for (int col = 0; col < n; col++) {
                 Layer1[row][col] = scanner.nextInt();
             }
         }
-        int validation1 = 1; //I will validate if there are no bricks with 3 halfs on a single column
+        int validation1 = 1; //Validation if there are no bricks with 3 halfs on a single column
         for (int row = 0; row < m-1 ; row++) {
             int current=0;
             for (int col = 0; col < n-1 ; col++) {
@@ -39,7 +39,7 @@ public class Main {
                 current=Layer1[row][col];
             }
         }
-        int validation2 = 1; //I will validate if there are no bricks with 3 halfs on a single row
+        int validation2 = 1; //Validation if there are no bricks with 3 halfs on a single row
         for (int col = 0; col < n ; col++) {
             int current=0;
             for (int row = 0; row < m ; row++) {
@@ -53,7 +53,7 @@ public class Main {
                 current=Layer1[row][col];
             }
         }
-        if (n == 2) {//We start building the second layer and check all the possibilities by taking 4 bricks at a time if possible, or we take 2 bricks at a time.
+        if (n == 2) {//Building the second layer and checking all the possibilities by taking 4 bricks at a time if possible, or we take 2 bricks at a time.
             for (int row = 0; row < m; row += 2) {
                 for (int col = 0; col < n; col += 2) {
                     if (Layer1[row][col] == Layer1[row][col + 1]
